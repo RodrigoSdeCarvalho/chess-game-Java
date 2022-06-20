@@ -3,12 +3,12 @@ package boardgame;
 public class Board {
     private int rows;
     private int columns;
-    private Piece[][] pieces;
+    private Piece[][] piecesMatrix;
 
     public Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
-        pieces = new Piece[rows][columns];
+        piecesMatrix = new Piece[rows][columns];
     }
 
     public int getRows() {
@@ -28,12 +28,33 @@ public class Board {
     }
 
     public Piece piece(int row, int column) {
-        return pieces[row][column];
+        return piecesMatrix[row][column];
     }
 
     public Piece piece(Position position) {
-        return pieces[position.getRow()][position.getColumn()];
+        return piecesMatrix[position.getRow()][position.getColumn()];
     }
 
-    
+    public void placePieceOnBoard(Piece piece, Position piecePosition) {
+        piecesMatrix[piecePosition.getRow()][piecePosition.getColumn()] = piece;
+        piece.position = piecePosition;
+    }
+
+    public boolean positionOnBoard(int row, int column) {
+        boolean rowOnboard = (row >= 0 && row < rows);
+        boolean columnOnBoard = (column >= 0 && column < columns);
+
+        return rowOnboard && columnOnBoard;
+    }
+
+    public boolean positionOnBoard(Position position) {
+        boolean rowOnboard = (position.getRow() >= 0 && position.getRow() < rows);
+        boolean columnOnBoard = (position.getColumn() >= 0 && position.getColumn() < columns);
+
+        return rowOnboard && columnOnBoard;
+    }
+
+    public boolean isThereAPieceOnThisPosition(Position position) {
+        return piece(position) != null;
+    }
 }
