@@ -26,6 +26,10 @@ public class ChessMatch {
         return piecesMatrix;
     }
 
+    private void placePieceOnBoard(char column, int row, ChessPiece piece) {
+        board.placePieceOnBoard(piece, new ChessPosition(column, row).toPosition());
+    }
+
     private void setupPiecesOnBoard() {
         board.placePieceOnBoard(new Rook(board, Color.WHITE), new Position(2, 1));
         board.placePieceOnBoard(new King(board, Color.WHITE), new Position(7, 4));
